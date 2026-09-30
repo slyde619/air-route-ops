@@ -1,0 +1,100 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Route Ops design tokens.
+   Single source of truth: every colour, size, font and duration used anywhere
+   in the app resolves to a value declared in this block. Components reference
+   them through Tailwind utilities (bg-surface, text-signal, font-data, ...).
+   --------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'InterVariable';
+  src: url('/fonts/inter-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PlexSansVariable';
+  src: url('/fonts/ibm-plex-sans-variable.woff2') format('woff2-variations');
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* -- surfaces: cool neutral, reads as an instrument panel rather than paper */
+  --color-canvas: #0e1417;
+  --color-surface: #151c20;
+  --color-raised: #1c2529;
+  --color-line: #2a353b;
+  --color-line-bright: #3a4750;
+
+  /* -- ink */
+  --color-ink: #e8eef0;
+  --color-muted: #93a1a8;
+  --color-faint: #63737a;
+
+  /* -- brand: adapted from Ibom Air's teal/green, not a logo reproduction */
+  --color-brand: #12b39a;
+  --color-brand-strong: #4fe0c4;
+  --color-brand-deep: #0b6b5d;
+  --color-gold: #e3b23c;
+
+  /* -- the one accent, reserved for deltas that need attention */
+  --color-signal: #ff6b57;
+
+  /* -- type */
+  --font-ui: 'PlexSansVariable', 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-data: 'InterVariable', Inter, ui-sans-serif, system-ui, sans-serif;
+
+  /* -- type scale: eight steps, named for their job rather than their size */
+  --text-micro: 0.6875rem; /* 11px — axis ticks, unit suffixes, footnotes */
+  --text-label: 0.75rem; /* 12px — control labels, table cells, state copy */
+  --text-body: 0.8125rem; /* 13px — default body and section headings */
+  --text-lead: 0.9375rem; /* 15px — panel intros */
+  --text-title: 1rem; /* 16px — the page title */
+  --text-metric: 1.5rem; /* 24px — KPI values */
+  --text-metric-lg: 1.875rem; /* 30px — the lead KPI value */
+
+  /* -- letter spacing used sparingly, as a named step */
+  --tracking-tight: -0.01em;
+  --tracking-loose: 0.03em;
+
+  /* -- spacing steps used by the shell */
+  --spacing-rail: 21rem;
+  --spacing-map: 13rem;
+
+  /* -- motion */
+  --ease-panel: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-ui);
+    font-size: 15px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* one visible, consistent focus treatment for every interactive control */
+  :where(a, button, select, input, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-brand-strong);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-deep);
+    color: var(--color-ink);
+  }
+}
